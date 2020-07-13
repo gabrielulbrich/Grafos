@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minimum spanning tree</title>
+    <script type="text/javascript" src="grafos.js"></script>
+    <!--<script type="text/javascript" src="prim.js"></script>-->
+    <script type="text/javascript" src="prim.js"></script>
+    <script type="text/javascript" src="kruskal.js"></script>
+    <script type="text/javascript" src="graphBuilder.js"></script>
+    <script type="text/javascript">
+
+        window.onload = function()
+        {
+            var canvas = document.getElementById("grafo");
+            var grafo = new graphBuilder(canvas);
+            grafo.init(Grafos[0]);
+
+            var grafo1clone = JSON.stringify(Grafos[0]);
+            var grafo2clone = JSON.stringify(Grafos[1]);
+			
+			var grafoAtual = grafo1clone;
+
+            var grafo1 = document.getElementById("grafo1");
+            var grafo2 = document.getElementById("grafo2");
+
+            var prim = document.getElementById("prim");
+            var kruskal = document.getElementById("kruskal");
+            
+            var removeGrau = document.getElementById("removeGrau");
+
+            grafo1.onclick = function()
+            {
+                grafo.init(JSON.parse(grafo1clone));
+                grafoAtual = grafo1clone;
+            };
+
+            grafo2.onclick = function()
+            {
+                grafo.init(JSON.parse(grafo2clone));
+                grafoAtual = grafo2clone;
+            };
+
+            prim.onclick = function()
+            {
+                grafo.init(Prim(JSON.parse(grafoAtual)));
+            };
+			
+			kruskal.onclick = function()
+			{
+				grafo.init(Kruskal(JSON.parse(grafoAtual)));
+			}
+        }
+
+    </script>
+    <style type="text/css">
+        .grafo{
+            float: left;
+        }
+
+        div.grafo
+        {
+            background: red;
+            height: 150px;
+            width: 150px;
+            opacity: 0.8;
+            margin: 2px;
+            font: 20pt verdana;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            line-height: 110pt;
+            cursor: pointer;
+        }
+
+        div#grafo2
+        {
+            background: #007AFF;
+        }
+
+        #grafo3{
+            background: #FA6E00;
+        }
+
+        #grafo4{
+            background: purple;
+        }
+        
+        #grafo5{
+            background: yellow;
+        }
+        
+        #grafo6{
+            background: orange;
+        }
+
+        .grafo:hover
+        {
+            opacity: 1;
+        }
+
+        #prim, #kruskal
+        {
+            width: 300px;
+        }
+		
+		#kruskal
+		{
+			background:rgb(11, 172, 11);
+		}
+    </style>
+</head>
+<body>
+<canvas id="grafo" class="grafo" height="900" width="700"></canvas>
+<div class="grafo" id="grafo1">Grafo 1</div>
+<div class="grafo" id="grafo2">Grafo 2</div>
+
+<div class="grafo" id="prim" hidden>Prim!</div>
+<div class="grafo" id="kruskal">Kruskal!</div>
+<div class="grafo" id="removeGrau">REMOVE GRAU</div>
+</body>
+</html>
